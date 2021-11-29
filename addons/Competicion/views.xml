@@ -1,0 +1,181 @@
+<odoo>
+    <data>
+        <!-- DEFINICION DE MENUS-->
+        <!-- actions opening views on models-->
+        <record model="ir.actions.act_window" id="propietario_action_window">
+            <field name="name"> Propietario </field>
+            <field name="res_model">competicion.propietario</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="dogs_action_window">
+            <field name="name"> Perros </field>
+            <field name="res_model">competicion.dog</field>
+            <field name="view_mode">tree,form,calendar</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="participante_action_window">
+            <field name="name"> Participante </field>
+            <field name="res_model">competicion.participante</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="pruebas_action_window">
+            <field name="name"> Pruebas </field>
+            <field name="res_model">competicion.prueba</field>
+            <field name="view_mode">tree,form,calendar</field>
+        </record>
+
+
+
+        <!-- Top menu items -->
+        <menuitem name="Competicion" id="competicion_menu_root"/>
+        <!-- Declaracion de menus -->
+
+        <menuitem name="Propietario" id="propietario_menu" parent="competicion_menu_root" action="propietario_action_window"/>
+        <menuitem name="Perros" id="perros_menu" parent="competicion_menu_root" action="dogs_action_window"/>
+        <menuitem name="Participante" id="participante_menu" parent="competicion_menu_root" action="participante_action_window"/>
+        <menuitem name="Pruebas" id="pruebas_menu" parent="competicion_menu_root" action="pruebas_action_window"/>
+
+        <!-- Vistas propietario-->
+        <record model="ir.ui.view" id="propietario_list_view">
+            <field name="name">competicion.propietario.view.tree</field>
+            <field name="model">competicion.propietario</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="lastname"/>
+                    <field name="age"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="propietario_form_view">
+            <field name="name">competicion.propietario.view.form</field>
+            <field name="model">competicion.propietario</field>
+            <field name="arch" type="xml">
+                <form string="Formulario de propietario">
+                    <sheet>
+                        <group>
+                            <separator string="Nombre"/>
+                            <field name="name" placeholder="Nombre"/>
+                            <field name="lastname" placeholder="Apellidos"/>
+                        </group>
+
+                        <group>
+                            <separator string="Informacion adicional"/>
+                            <field name="age" placeholder="Edad"/>
+                        </group>
+
+                        <group>
+                            <separator string="Sus perros"/>
+                            <field name="dog_ids"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vista perros-->
+        <record model="ir.ui.view" id="dog_list_view">
+            <field name="name">competicion.dog.view.tree</field>
+            <field name="model">competicion.dog</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="microchip"/>
+                    <field name="fecha_nacimiento"/>
+                    <field name="edad"/>
+                    <field name="raza"/>
+                    <field name="propietario_id"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="dog_form_view">
+            <field name="name">competicion.dog.view.form</field>
+            <field name="model">competicion.dog</field>
+            <field name="arch" type="xml">
+                <form string="Formulario del Perro">
+                    <sheet>
+                        <group>
+                            <separator string="Informacion"/>
+                            <field name="name" placeholder="Nombre"/>
+                            <field name="microchip" placeholder="Numero microchip"/>
+                            <field name="fecha_nacimiento" placeholder="Fecha de nacimiento"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="edad"/>
+                                <field name="raza"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+        <record model="ir.ui.view" id="dog_calendar_view">
+            <field name="name">competicion.dog.view.calendar</field>
+            <field name="model">competicion.dog</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendario perros" date_start="fecha_nacimiento" color="microchip" mode="month">
+                    <field name="name"/>
+                    <field name="microchip"/>
+                </calendar>
+            </field>
+        </record>
+
+
+
+        <!--Vista Participantes-->
+        <record model="ir.ui.view" id="participante_list_view">
+            <field name="name">competicion.participante.view.tree</field>
+            <field name="model">competicion.participante</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="licencia"/>
+                    <field name="dog_ids"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Vistas pruebas-->
+
+        <record model="ir.ui.view" id="pruebas_list_view">
+            <field name="name">competicion.prueba.view.tree</field>
+            <field name="model">competicion.prueba</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="club"/>
+                    <field name="place"/>
+                    <field name="date"/>
+                </tree>
+            </field>
+        </record>
+
+
+
+
+        <record model="ir.ui.view" id="pruebas_calendar_view">
+            <field name="name">competicion.prueba.view.calendar</field>
+            <field name="model">competicion.prueba</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendario pruebas" date_start="date" color="place" mode="month">
+                    <field name="club"/>
+                    <field name="place"/>
+                </calendar>
+            </field>
+        </record>
+
+
+
+
+    </data>
+</odoo>
